@@ -1,3 +1,13 @@
 spring:
   application:
     name: ling-long
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ling_long?currentSchema=app_data
+    username: postgres
+    password: postgres
+jimmer:
+  language: kotlin
+  dialect: org.babyfish.jimmer.sql.dialect.PostgresDialect
+  database-validation:
+    mode: ERROR
