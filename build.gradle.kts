@@ -35,6 +35,9 @@ dependencies {
     // jimmer
     implementation("org.babyfish.jimmer:jimmer-spring-boot-starter:${jimmerVersion}")
     ksp("org.babyfish.jimmer:jimmer-ksp:${jimmerVersion}")
+
+    // Sa-Token 权限认证，在线文档：https://sa-token.cc
+    implementation("cn.dev33:sa-token-spring-boot3-starter:1.38.0")
 }
 
 kotlin {
