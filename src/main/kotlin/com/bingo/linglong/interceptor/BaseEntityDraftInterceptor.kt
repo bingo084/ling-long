@@ -13,23 +13,23 @@ class BaseEntityDraftInterceptor(
 ) : DraftInterceptor<BaseEntity, BaseEntityDraft> {
 
     override fun beforeSave(draft: BaseEntityDraft, original: BaseEntity?) {
-        if (!isLoaded(draft, BaseEntity::modifiedAt)) {
-            draft.modifiedAt = LocalDateTime.now()
+        if (!isLoaded(draft, BaseEntity::updateTime)) {
+            draft.updateTime = LocalDateTime.now()
         }
 
-        if (!isLoaded(draft, BaseEntity::modifiedBy)) {
-            draft.modifiedBy {
+        if (!isLoaded(draft, BaseEntity::updater)) {
+            draft.updater {
                 id = StpUtil.getLoginIdAsLong();
             }
         }
 
         if (original === null) {
-            if (!isLoaded(draft, BaseEntity::createdAt)) {
-                draft.createdAt = LocalDateTime.now()
+            if (!isLoaded(draft, BaseEntity::createTime)) {
+                draft.createTime = LocalDateTime.now()
             }
 
-            if (!isLoaded(draft, BaseEntity::createdBy)) {
-                draft.createdBy {
+            if (!isLoaded(draft, BaseEntity::creator)) {
+                draft.creator {
                     id = StpUtil.getLoginIdAsLong();
                 }
             }
