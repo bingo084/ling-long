@@ -5,6 +5,7 @@ import com.bingo.linglong.system.enums.UserState
 import org.babyfish.jimmer.sql.Entity
 import org.babyfish.jimmer.sql.ManyToMany
 import org.babyfish.jimmer.sql.ManyToOne
+import org.babyfish.jimmer.sql.Table
 
 /**
  * 用户
@@ -12,6 +13,7 @@ import org.babyfish.jimmer.sql.ManyToOne
  * @author bingo
  */
 @Entity
+@Table(name = "sys_user")
 interface User : BaseEntity {
     /** 用户名 */
     val username: String

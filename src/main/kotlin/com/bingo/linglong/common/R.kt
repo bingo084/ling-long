@@ -7,11 +7,15 @@ package com.bingo.linglong.common
  */
 data class R<T>(val success: Boolean, val message: String, val data: T?) {
     companion object {
-        fun <T> ok(data: T?): R<T> {
-            return R(true, "", data)
+        fun ok(message: String): R<Unit> {
+            return R(true, message, null)
         }
 
-        fun fail(message: String): R<Nothing> {
+        fun <T> ok(message: String, data: T?): R<T> {
+            return R(true, message, data)
+        }
+
+        fun fail(message: String): R<Unit> {
             return R(false, message, null)
         }
     }

@@ -1,0 +1,9 @@
+input UserInput {
+  #allScalars
+  id(dept)
+  id(roles)? as roleIds
+  -password
+  -state
+  -createTime
+  -updateTime
+}

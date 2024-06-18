@@ -3,7 +3,7 @@ spring:
     name: ling-long
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ling_long?currentSchema=app_data
+    url: jdbc:postgresql://localhost:5432/ling_long
     username: postgres
     password: postgres
 jimmer:
@@ -11,5 +11,15 @@ jimmer:
   dialect: org.babyfish.jimmer.sql.dialect.PostgresDialect
   database-validation:
     mode: ERROR
+  client:
+    openapi:
+      path: /openapi.yml
+      ui-path: /openapi.html
+      properties:
+        info:
+          title: LingLong Web Service
+          description: |
+            LingLong 后台管理系统
+          version: 1.0
 sa-token:
   token-name: Authorization
