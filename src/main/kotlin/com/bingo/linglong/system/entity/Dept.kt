@@ -1,9 +1,7 @@
 package com.bingo.linglong.system.entity
 
 import com.bingo.linglong.common.BaseEntity
-import org.babyfish.jimmer.sql.Entity
-import org.babyfish.jimmer.sql.ManyToOne
-import org.babyfish.jimmer.sql.OneToMany
+import org.babyfish.jimmer.sql.*
 
 /**
  * 部门
@@ -20,6 +18,7 @@ interface Dept : BaseEntity {
 
     /** 父部门 */
     @ManyToOne
+    @OnDissociate(DissociateAction.DELETE)
     val parent: Dept?
 
     /** 子部门 */

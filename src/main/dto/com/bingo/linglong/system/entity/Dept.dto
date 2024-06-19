@@ -1,0 +1,6 @@
+dynamic input DeptInput {
+  #allScalars
+  id(parent)
+  -createTime
+  -updateTime
+}
