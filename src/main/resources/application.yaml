@@ -11,6 +11,10 @@ jimmer:
   dialect: org.babyfish.jimmer.sql.dialect.PostgresDialect
   database-validation:
     mode: ERROR
+  show-sql: true
+  pretty-sql: true
+  executor-context-prefixes:
+    - com.bingo.linglong
   client:
     openapi:
       path: /openapi.yml
