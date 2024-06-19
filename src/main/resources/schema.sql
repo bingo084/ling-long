@@ -24,7 +24,7 @@ CREATE TABLE role
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(20) NOT NULL,
-    "desc"      VARCHAR(255),
+    description VARCHAR(255),
     create_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     creator_id  INT         NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE dept
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(20) NOT NULL,
-    "desc"      VARCHAR(255),
+    description VARCHAR(255),
     parent_id   INT,
     create_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,

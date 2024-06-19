@@ -15,7 +15,7 @@ interface Role : BaseEntity {
     val name: String
 
     /** 描述 */
-    val desc: String?
+    val description: String?
 
     /** 菜单 */
     @ManyToMany
