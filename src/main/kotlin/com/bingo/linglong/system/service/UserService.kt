@@ -1,20 +1,55 @@
 package com.bingo.linglong.system.service
 
 import com.bingo.linglong.system.entity.User
+import com.bingo.linglong.system.entity.by
 import com.bingo.linglong.system.entity.copy
 import com.bingo.linglong.system.entity.dto.UserInput
 import com.bingo.linglong.system.repository.UserRepository
 import org.babyfish.jimmer.Page
-import org.babyfish.jimmer.sql.fetcher.Fetcher
-import org.springframework.stereotype.Service
+import org.babyfish.jimmer.sql.kt.fetcher.newFetcher
+import org.springframework.web.bind.annotation.*
 
-@Service
+@RestController
+@RequestMapping("/system/users")
 class UserService(val repository: UserRepository) {
-    fun findPage(current: Int, size: Int, fetcher: Fetcher<User>): Page<User> =
-        repository.findPage(current, size, fetcher)
+    /**
+     * 分页查询
+     */
+    @GetMapping
+    fun findPage(
+        @RequestParam index: Int,
+        @RequestParam size: Int,
+    ): Page<User> =
+        repository.findPage(index, size, COMPLEX_USER)
 
+    /**
+     * 保存
+     */
+    @PostMapping
     fun save(input: UserInput): User =
         repository.save(input.toEntity().copy { password = "123456" })
 
-    fun deleteById(id: Long) = repository.deleteById(id)
+    /**
+     * 删除
+     */
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable id: Long) = repository.deleteById(id)
+
+    companion object {
+        val COMPLEX_USER = newFetcher(User::class).by {
+            allScalarFields()
+            dept { allScalarFields() }
+            roles { allScalarFields() }
+            creator {
+                username()
+                nickname()
+                realName()
+            }
+            updater {
+                username()
+                nickname()
+                realName()
+            }
+        }
+    }
 }
