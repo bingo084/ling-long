@@ -6,6 +6,7 @@ import com.bingo.linglong.system.entity.copy
 import com.bingo.linglong.system.entity.dto.UserInput
 import com.bingo.linglong.system.repository.UserRepository
 import org.babyfish.jimmer.Page
+import org.babyfish.jimmer.client.FetchBy
 import org.babyfish.jimmer.sql.kt.fetcher.newFetcher
 import org.springframework.web.bind.annotation.*
 
@@ -19,15 +20,15 @@ class UserService(val repository: UserRepository) {
     fun findPage(
         @RequestParam index: Int,
         @RequestParam size: Int,
-    ): Page<User> =
+    ): Page<@FetchBy("COMPLEX_USER") User> =
         repository.findPage(index, size, COMPLEX_USER)
 
     /**
      * 保存
      */
     @PostMapping
-    fun save(input: UserInput): User =
-        repository.save(input.toEntity().copy { password = "123456" })
+    fun save(input: UserInput): Long =
+        repository.save(input.toEntity().copy { password = "123456" }).id
 
     /**
      * 删除
