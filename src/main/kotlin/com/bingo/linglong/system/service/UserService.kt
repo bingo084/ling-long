@@ -33,8 +33,8 @@ class UserService(val repository: UserRepository) {
     /**
      * 删除
      */
-    @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = repository.deleteById(id)
+    @DeleteMapping("/{ids}")
+    fun deleteById(@PathVariable ids: List<Long>) = repository.deleteByIds(ids)
 
     companion object {
         val COMPLEX_USER = newFetcher(User::class).by {

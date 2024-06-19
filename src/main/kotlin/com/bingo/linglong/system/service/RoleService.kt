@@ -31,8 +31,8 @@ class RoleService(val repository: RoleRepository) {
     /**
      * 删除
      */
-    @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = repository.deleteById(id)
+    @DeleteMapping("/{ids}")
+    fun deleteById(@PathVariable ids: List<Long>) = repository.deleteByIds(ids)
 
     companion object {
         val SIMPLE_ROLE = newFetcher(Role::class).by {
