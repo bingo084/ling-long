@@ -1,6 +1,5 @@
 package com.bingo.linglong.system.controller
 
-import com.bingo.linglong.common.R
 import com.bingo.linglong.system.entity.User
 import com.bingo.linglong.system.entity.by
 import com.bingo.linglong.system.entity.dto.UserInput
@@ -25,23 +24,19 @@ class UserController(val service: UserService) {
     fun findPage(
         @RequestParam index: Int,
         @RequestParam size: Int
-    ): R<Page<@FetchBy("COMPLEX_USER") User>> =
-        R.ok("查询成功", service.findPage(index, size, COMPLEX_USER))
+    ): Page<@FetchBy("COMPLEX_USER") User> = service.findPage(index, size, COMPLEX_USER)
 
     /**
      * 保存
      */
     @PostMapping
-    fun save(@RequestBody input: UserInput): R<User> = R.ok("保存成功", service.save(input))
+    fun save(@RequestBody input: UserInput): User = service.save(input)
 
     /**
      * 删除
      */
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): R<User> {
-        service.deleteById(id)
-        return R.ok("删除成功", null)
-    }
+    fun delete(@PathVariable id: Long) = service.deleteById(id)
 
     companion object {
         val COMPLEX_USER = newFetcher(User::class).by {
