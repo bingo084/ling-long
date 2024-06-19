@@ -1,0 +1,6 @@
+dynamic input RoleInput {
+  #allScalars
+  id(menus)? as menuIds
+  -createTime
+  -updateTime
+}
