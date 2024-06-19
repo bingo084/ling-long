@@ -1,4 +1,4 @@
-input UserInput {
+dynamic input UserInput {
   #allScalars
   id(dept)
   id(roles)? as roleIds
