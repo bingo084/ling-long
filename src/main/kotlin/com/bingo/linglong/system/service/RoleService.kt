@@ -26,7 +26,7 @@ class RoleService(val repository: RoleRepository) {
      * 保存
      */
     @PostMapping
-    fun save(role: RoleInput): Long = repository.save(role).id
+    fun save(@RequestBody role: RoleInput): Long = repository.save(role).id
 
     /**
      * 删除

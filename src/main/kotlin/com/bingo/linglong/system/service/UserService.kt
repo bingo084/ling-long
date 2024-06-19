@@ -27,7 +27,7 @@ class UserService(val repository: UserRepository) {
      * 保存
      */
     @PostMapping
-    fun save(input: UserInput): Long =
+    fun save(@RequestBody input: UserInput): Long =
         repository.save(input.toEntity().copy { password = "123456" }).id
 
     /**

@@ -22,7 +22,7 @@ class DeptService(val repository: DeptRepository) {
      * 保存
      */
     @PostMapping
-    fun save(dept: DeptInput): Long = repository.save(dept).id
+    fun save(@RequestBody dept: DeptInput): Long = repository.save(dept).id
 
     /**
      * 删除
