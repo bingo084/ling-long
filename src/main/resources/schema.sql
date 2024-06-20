@@ -35,6 +35,7 @@ ALTER TABLE role
     ADD CONSTRAINT fk_role_updater_id FOREIGN KEY (updater_id) REFERENCES sys_user (id);
 
 CREATE TYPE menu_type AS ENUM ('CATALOG','MENU', 'BUTTON');
+CREATE CAST ( VARCHAR AS menu_type ) WITH INOUT AS ASSIGNMENT;
 CREATE TABLE menu
 (
     id          SERIAL PRIMARY KEY,
