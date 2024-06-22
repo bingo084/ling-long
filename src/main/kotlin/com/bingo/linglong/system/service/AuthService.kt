@@ -2,6 +2,7 @@ package com.bingo.linglong.system.service
 
 import cn.dev33.satoken.stp.SaTokenInfo
 import cn.dev33.satoken.stp.StpUtil
+import com.bingo.linglong.exception.AuthException
 import com.bingo.linglong.system.entity.User
 import com.bingo.linglong.system.entity.by
 import com.bingo.linglong.system.enums.UserState
@@ -20,15 +21,17 @@ class AuthService(val userRepo: UserRepository) {
      * 登录
      */
     @PostMapping("/login")
+    @Throws(AuthException.UsernameOrPasswordError::class, AuthException.AccountBanned::class)
     fun login(@RequestBody req: LoginReq): SaTokenInfo {
         val user = userRepo.findByUsername(req.username)
         when (user?.state) {
-            UserState.INACTIVE, null -> throw RuntimeException("用户名或密码错误")
-            UserState.BANNED -> throw RuntimeException("您的账户已被禁用，请联系管理员")
+            UserState.INACTIVE -> throw AuthException.usernameOrPasswordError("User(${user.username}) is inactive")
+            null -> throw AuthException.usernameOrPasswordError("User(${req.username}) not found")
+            UserState.BANNED -> throw AuthException.accountBanned("User(${user.username}) is banned")
             UserState.ACTIVE -> {}
         }
         if (user.password != req.password) {
-            throw RuntimeException("用户名或密码错误")
+            throw AuthException.usernameOrPasswordError("User(${user.username}) password error")
         }
         StpUtil.login(user.id)
         return StpUtil.getTokenInfo()!!
