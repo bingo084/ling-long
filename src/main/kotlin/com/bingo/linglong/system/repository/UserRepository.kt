@@ -10,4 +10,6 @@ interface UserRepository : KRepository<User, Long> {
         sql.createQuery(User::class) {
             select(table.fetch(fetcher))
         }.fetchPage(index, size)
+
+    fun findByUsername(username: String): User?
 }
