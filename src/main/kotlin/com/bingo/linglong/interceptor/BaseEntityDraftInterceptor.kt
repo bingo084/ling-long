@@ -1,5 +1,6 @@
 package com.bingo.linglong.interceptor
 
+import cn.dev33.satoken.stp.StpUtil
 import com.bingo.linglong.common.BaseEntity
 import com.bingo.linglong.common.BaseEntityDraft
 import org.babyfish.jimmer.kt.isLoaded
@@ -18,8 +19,7 @@ class BaseEntityDraftInterceptor(
 
         if (!isLoaded(draft, BaseEntity::updater)) {
             draft.updater {
-//                id = StpUtil.getLoginIdAsLong()
-                id = 0
+                id = StpUtil.getLoginIdAsLong()
             }
         }
 
@@ -30,8 +30,7 @@ class BaseEntityDraftInterceptor(
 
             if (!isLoaded(draft, BaseEntity::creator)) {
                 draft.creator {
-//                    id = StpUtil.getLoginIdAsLong()
-                    id = 0
+                    id = StpUtil.getLoginIdAsLong()
                 }
             }
         }
