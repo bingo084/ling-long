@@ -40,6 +40,7 @@ CREATE TABLE menu
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(20) NOT NULL,
+    permission VARCHAR(50),
     icon        VARCHAR(20),
     route       VARCHAR(255),
     sort        INT         NOT NULL,

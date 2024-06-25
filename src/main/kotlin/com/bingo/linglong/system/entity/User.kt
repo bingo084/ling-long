@@ -2,6 +2,7 @@ package com.bingo.linglong.system.entity
 
 import com.bingo.linglong.common.BaseEntity
 import com.bingo.linglong.system.enums.UserState
+import org.babyfish.jimmer.Formula
 import org.babyfish.jimmer.sql.Entity
 import org.babyfish.jimmer.sql.ManyToMany
 import org.babyfish.jimmer.sql.ManyToOne
@@ -46,4 +47,9 @@ interface User : BaseEntity {
     /** 角色 */
     @ManyToMany
     val roles: List<Role>
+
+    /** 权限 */
+    @Formula(dependencies = ["roles"])
+    val permissions: List<String>
+        get() = roles.flatMap { it.menus }.mapNotNull { it.permission }.distinct()
 }

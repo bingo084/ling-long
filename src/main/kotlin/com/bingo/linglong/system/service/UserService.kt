@@ -1,5 +1,6 @@
 package com.bingo.linglong.system.service
 
+import cn.dev33.satoken.annotation.SaCheckPermission
 import com.bingo.linglong.system.entity.User
 import com.bingo.linglong.system.entity.by
 import com.bingo.linglong.system.entity.copy
@@ -17,6 +18,7 @@ class UserService(val repository: UserRepository) {
      * 分页查询
      */
     @GetMapping
+    @SaCheckPermission("system:user:list")
     fun findPage(
         @RequestParam index: Int,
         @RequestParam size: Int,
@@ -27,6 +29,7 @@ class UserService(val repository: UserRepository) {
      * 保存
      */
     @PostMapping
+    @SaCheckPermission("system:user:save")
     fun save(@RequestBody input: UserInput): Long =
         repository.save(input.toEntity().copy { password = "123456" }).id
 
@@ -34,13 +37,18 @@ class UserService(val repository: UserRepository) {
      * 删除
      */
     @DeleteMapping("/{ids}")
+    @SaCheckPermission("system:user:delete")
     fun deleteById(@PathVariable ids: List<Long>) = repository.deleteByIds(ids)
 
     companion object {
         val COMPLEX_USER = newFetcher(User::class).by {
             allScalarFields()
             dept { allScalarFields() }
-            roles { allScalarFields() }
+            roles {
+                allScalarFields()
+                menus { allScalarFields() }
+            }
+            permissions()
             creator {
                 username()
                 nickname()

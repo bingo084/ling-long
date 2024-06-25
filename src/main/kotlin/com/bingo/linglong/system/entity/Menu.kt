@@ -16,6 +16,9 @@ interface Menu : BaseEntity {
     /** 名称 */
     val name: String
 
+    /** 权限 */
+    val permission: String?
+
     /** 图标 */
     val icon: String?
 

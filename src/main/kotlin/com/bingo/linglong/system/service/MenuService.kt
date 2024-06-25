@@ -1,5 +1,6 @@
 package com.bingo.linglong.system.service
 
+import cn.dev33.satoken.annotation.SaCheckPermission
 import com.bingo.linglong.system.entity.Menu
 import com.bingo.linglong.system.entity.by
 import com.bingo.linglong.system.entity.dto.MenuInput
@@ -15,6 +16,7 @@ class MenuService(val repository: MenuRepository) {
      * 查询树
      */
     @GetMapping
+    @SaCheckPermission("system:menu:list")
     fun findTree(): List<@FetchBy("TREE_MENU") Menu> =
         repository.findRoot(TREE_MENU)
 
@@ -22,12 +24,14 @@ class MenuService(val repository: MenuRepository) {
      * 保存
      */
     @PostMapping
+    @SaCheckPermission("system:menu:save")
     fun save(@RequestBody menu: MenuInput): Long = repository.save(menu).id
 
     /**
      * 删除
      */
     @DeleteMapping("/{ids}")
+    @SaCheckPermission("system:menu:delete")
     fun deleteById(@PathVariable ids: List<Long>) = repository.deleteByIds(ids)
 
     companion object {

@@ -1,5 +1,6 @@
 package com.bingo.linglong.system.service
 
+import cn.dev33.satoken.annotation.SaCheckPermission
 import cn.dev33.satoken.stp.SaTokenInfo
 import cn.dev33.satoken.stp.StpUtil
 import com.bingo.linglong.exception.AuthException
@@ -49,6 +50,7 @@ class AuthService(val userRepo: UserRepository) {
      * 封禁
      */
     @PostMapping("/ban/{userId}")
+    @SaCheckPermission("system:auth:ban")
     fun ban(@PathVariable userId: Long) {
         userRepo.save(new(User::class).by {
             id = userId
@@ -61,6 +63,7 @@ class AuthService(val userRepo: UserRepository) {
      * 解封
      */
     @PostMapping("/unban/{userId}")
+    @SaCheckPermission("system:auth:unban")
     fun unban(@PathVariable userId: Long) {
         userRepo.save(new(User::class).by {
             id = userId
