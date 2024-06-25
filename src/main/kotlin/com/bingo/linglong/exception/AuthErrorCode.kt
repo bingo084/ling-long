@@ -6,5 +6,4 @@ import org.babyfish.jimmer.error.ErrorFamily
 enum class AuthErrorCode {
     USERNAME_OR_PASSWORD_ERROR,
     ACCOUNT_BANNED,
-    NOT_LOGIN
 }
