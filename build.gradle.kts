@@ -21,7 +21,7 @@ repositories {
     }
 }
 
-val jimmerVersion = "0.8.130"
+val jimmerVersion = "0.8.139"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")

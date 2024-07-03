@@ -15,17 +15,14 @@ class StpInterfaceImpl(val userRepository: UserRepository) : StpInterface {
     }
 
     override fun getRoleList(loginId: Any?, loginType: String?): MutableList<String> {
-        val user = userRepository.findById(loginId.toString().toLong(), PERMISSION_USER)
+        val user = userRepository.findById(loginId.toString().toLong(), ROLE_NAME_USER)
         return user.map { it -> it.roles.stream().map { it.name }.toList() }.orElse(mutableListOf())
     }
 
     companion object {
-        val PERMISSION_USER = newFetcher(User::class).by {
-            roles {
-                name()
-                menus { permission() }
-            }
-            permissions()
+        val PERMISSION_USER = newFetcher(User::class).by { permissions() }
+        val ROLE_NAME_USER = newFetcher(User::class).by {
+            roles { name() }
         }
     }
 }

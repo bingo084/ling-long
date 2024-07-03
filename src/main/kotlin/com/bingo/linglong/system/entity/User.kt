@@ -49,7 +49,7 @@ interface User : BaseEntity {
     val roles: List<Role>
 
     /** 权限 */
-    @Formula(dependencies = ["roles"])
+    @Formula(dependencies = ["roles.menus.permission"])
     val permissions: List<String>
         get() = roles.flatMap { it.menus }.mapNotNull { it.permission }.distinct()
 }
