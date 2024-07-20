@@ -12,6 +12,6 @@ class SaTokenConfigure : WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         registry.addInterceptor(SaInterceptor() { StpUtil.checkLogin() })
             .addPathPatterns("/**")
-            .excludePathPatterns("/system/auth/login", "/openapi.yml")
+            .excludePathPatterns("/system/auth/login", "/openapi.yml", "/ts.zip")
     }
 }

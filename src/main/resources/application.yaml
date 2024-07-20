@@ -26,5 +26,7 @@ jimmer:
           description: |
             LingLong 后台管理系统
           version: 1.0
+    ts:
+      path: /ts.zip
 sa-token:
   token-name: Authorization
